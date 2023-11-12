@@ -2,13 +2,13 @@
   "name": "@tree-finder/base",
   "version": "0.0.13",
   "description": "browser/tree widget implemented as a custom DOM element. Built on top of regular-table",
-  "homepage": "https://github.com/telamonian/tree-finder",
+  "homepage": "https://github.com/tree-finder/tree-finder",
   "bugs": {
-    "url": "https://github.com/telamonian/tree-finder/issues"
+    "url": "https://github.com/tree-finder/tree-finder/issues"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/telamonian/tree-finder.git"
+    "url": "https://github.com/tree-finder/tree-finder.git"
   },
   "license": "BSD-3-Clause",
   "author": "Max Klein <telamonian@users.noreply.github.com>",
