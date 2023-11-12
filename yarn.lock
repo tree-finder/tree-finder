@@ -668,6 +668,22 @@
   resolved "https://registry.yarnpkg.com/@tootallnate/once/-/once-2.0.0.tgz#f544a148d3ab35801c1f633a7441fd87c2e484bf"
   integrity sha512-XCuKFP5PS55gnMVu3dty8KPatLqUoy/ZYzDzAGCQ8JNFCkLXzmI7vNHCR+XpbZaMWQK/vQubr7PkYq8g470J/A==
 
+"@tree-finder/base@0.1.0", "@tree-finder/base@^0.1.0":
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/@tree-finder/base/-/base-0.1.0.tgz#2810b5820ad91e55c3c45cd407617c78c4886341"
+  integrity sha512-AyLgHvvGn3ikZmSKGamcRhhL0i2uzv5sEqxLDTv13H4A+dZ/PSTimyjQ/q1Iymso7bbnVqQW15jq4lnQIGxgUQ==
+  dependencies:
+    regular-table "^0.5.6"
+    rxjs "^7.8.1"
+
+"@tree-finder/mockcontents@0.1.0":
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/@tree-finder/mockcontents/-/mockcontents-0.1.0.tgz#057ecca6515f8ca10d00d7558f9fff0380d54ad5"
+  integrity sha512-6I2nhgDR8yccwQifO1IFQWd8lwBS1fok1ck+eBq3tfqUyaKHBWH1YQZj1+YqYsUIGD5jPcVujkw2eLT7tTVnlA==
+  dependencies:
+    "@tree-finder/base" "^0.1.0"
+    faker "^6.6.6"
+
 "@trysound/sax@0.2.0":
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/@trysound/sax/-/sax-0.2.0.tgz#cccaab758af56761eb7bf37af6f03f326dd798ad"
@@ -6145,6 +6161,11 @@ regexp.prototype.flags@^1.5.1:
     call-bind "^1.0.2"
     define-properties "^1.2.0"
     set-function-name "^2.0.0"
+
+regular-table@^0.5.6:
+  version "0.5.9"
+  resolved "https://registry.yarnpkg.com/regular-table/-/regular-table-0.5.9.tgz#a5bfeeb67e3bcc9ab4e9f11cd9c3a40777267aa9"
+  integrity sha512-Ck5HYNS7lzsxsDWDBYzrCpwM1wsp5fMY42Ks730Otwq2U+XAlARJMg2tRexy+V8bLy9wiq+SH8EMC/yKqccLCA==
 
 regular-table@^0.6.3:
   version "0.6.3"
