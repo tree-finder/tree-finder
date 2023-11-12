@@ -10,62 +10,87 @@ import { IContentRow, Path } from "@tree-finder/base";
 
 import { ALLIED_PHONETIC, Random } from "./util";
 
-
 interface IMockContentRow extends IContentRow {
-  modified: Date;
+    modified: Date;
 
-  writable: boolean;
+    writable: boolean;
 }
 
-const _mockCache: {[key: string]: IMockContentRow[]} = {};
+const _mockCache: { [key: string]: IMockContentRow[] } = {};
 
 let mockFileIx = 0;
 let modDaysIx = -1;
 
-export function mockContent(props: {path: Path.PathArray, kind: string, modDays?: number, nchildren?: number, ndirectories?: number, randomize?: boolean}): IMockContentRow {
-  // infinite recursive mock contents
-  const {path, kind, modDays = modDaysIx++, nchildren = 100, ndirectories = 10, randomize = false} = props;
-  const modified = new Date(modDays * 24 * 60 * 60 * 1000);
-  const writable = randomize && Random.bool();
+export function mockContent(props: {
+    path: Path.PathArray;
+    kind: string;
+    modDays?: number;
+    nchildren?: number;
+    ndirectories?: number;
+    randomize?: boolean;
+}): IMockContentRow {
+    // infinite recursive mock contents
+    const {
+        path,
+        kind,
+        modDays = modDaysIx++,
+        nchildren = 100,
+        ndirectories = 10,
+        randomize = false,
+    } = props;
+    const modified = new Date(modDays * 24 * 60 * 60 * 1000);
+    const writable = randomize && Random.bool();
 
-  if (kind === "dir") {
-    // is a dir
-    return {
-      kind,
-      path,
-      modified,
-      writable,
-      getChildren: async () => {
-        const pathstr = path.join('/');
+    if (kind === "dir") {
+        // is a dir
+        return {
+            kind,
+            path,
+            modified,
+            writable,
+            getChildren: async () => {
+                const pathstr = path.join("/");
 
-        if (pathstr in _mockCache) {
-          return _mockCache[pathstr];
-        }
+                if (pathstr in _mockCache) {
+                    return _mockCache[pathstr];
+                }
 
-        const children = [];
-        const dirNames = randomize ? Random.shuffle(ALLIED_PHONETIC) : ALLIED_PHONETIC;
+                const children = [];
+                const dirNames = randomize
+                    ? Random.shuffle(ALLIED_PHONETIC)
+                    : ALLIED_PHONETIC;
 
-        for (let i = 0; i < nchildren; i++) {
-          children.push(mockContent({
-            kind: i < ndirectories ? "dir" : "text",
-            path: [...path, i < ndirectories ? `${dirNames[i]}` : `file_${`${mockFileIx++}`.padStart(7, '0')}.txt`],
-            nchildren,
-            ndirectories,
-            randomize,
-          }));
-        }
+                for (let i = 0; i < nchildren; i++) {
+                    children.push(
+                        mockContent({
+                            kind: i < ndirectories ? "dir" : "text",
+                            path: [
+                                ...path,
+                                i < ndirectories
+                                    ? `${dirNames[i]}`
+                                    : `file_${`${mockFileIx++}`.padStart(
+                                          7,
+                                          "0",
+                                      )}.txt`,
+                            ],
+                            nchildren,
+                            ndirectories,
+                            randomize,
+                        }),
+                    );
+                }
 
-        _mockCache[pathstr] = children;
-        return children;
-      },
-    };
-  } else {
-    // is a file
-    return {
-      kind,
-      path,
-      modified,
-      writable,
-    };
-  }
+                _mockCache[pathstr] = children;
+                return children;
+            },
+        };
+    } else {
+        // is a file
+        return {
+            kind,
+            path,
+            modified,
+            writable,
+        };
+    }
 }

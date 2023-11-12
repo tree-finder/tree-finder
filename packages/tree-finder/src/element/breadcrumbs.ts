@@ -8,39 +8,41 @@ import { IContentRow } from "../content";
 import { ContentsModel } from "../model";
 import { Tag, Tree } from "../util";
 
-export class TreeFinderBreadcrumbsElement<T extends IContentRow> extends HTMLElement {
-  connectedCallback() {
-    if (!this._initialized) {
-      this.create_shadow_dom();
+export class TreeFinderBreadcrumbsElement<
+    T extends IContentRow,
+> extends HTMLElement {
+    connectedCallback() {
+        if (!this._initialized) {
+            this.create_shadow_dom();
 
-      this._initialized = true;
+            this._initialized = true;
+        }
+
+        if (!this._initializedListeners) {
+            this.addEventListener("mouseup", (event) => this.onClick(event));
+
+            this._initializedListeners = true;
+        }
     }
 
-    if (!this._initializedListeners) {
-      this.addEventListener("mouseup", event => this.onClick(event));
+    init(model: ContentsModel<T>) {
+        this.model = model;
 
-      this._initializedListeners = true;
+        this.model.crumbModel.crumbNamesSub.subscribe({
+            next: (x) => this._onCrumbUpdate(x),
+        });
     }
-  }
 
-  init(model: ContentsModel<T>) {
-    this.model = model;
+    protected async _onCrumbUpdate(path: string[]) {
+        this.innerHTML = Tree.breadcrumbsSpans(path);
+    }
 
-    this.model.crumbModel.crumbNamesSub.subscribe({
-      next: x => this._onCrumbUpdate(x),
-    });
-  }
+    create_shadow_dom() {
+        this.attachShadow({ mode: "open" });
 
-  protected async _onCrumbUpdate(path: string[]) {
-    this.innerHTML = Tree.breadcrumbsSpans(path);
-  }
+        const crumbsSlot = `<slot></slot>`;
 
-  create_shadow_dom() {
-    this.attachShadow({mode: "open"});
-
-    const crumbsSlot = `<slot></slot>`;
-
-    this.shadowRoot!.innerHTML = Tag.html`
+        this.shadowRoot!.innerHTML = Tag.html`
       <style>
         :host > .tf-breadcrumbs-top {
           display: flex;
@@ -52,30 +54,41 @@ export class TreeFinderBreadcrumbsElement<T extends IContentRow> extends HTMLEle
       </div>
     `;
 
-    [this.shadowSheet, this.top] = this.shadowRoot!.children as any as [StyleSheet,HTMLElement];
-  }
-
-  async onClick(event: MouseEvent) {
-    if (event.button !== 0) {
-      return;
+        [this.shadowSheet, this.top] = this.shadowRoot!.children as any as [
+            StyleSheet,
+            HTMLElement,
+        ];
     }
 
-    const target = event.target as HTMLElement;
+    async onClick(event: MouseEvent) {
+        if (event.button !== 0) {
+            return;
+        }
 
-    if (target.dataset.crumbix) {
-      this.model.crumbModel.revert(parseInt(target.dataset.crumbix));
+        const target = event.target as HTMLElement;
+
+        if (target.dataset.crumbix) {
+            this.model.crumbModel.revert(parseInt(target.dataset.crumbix));
+        }
     }
-  }
 
-  protected model: ContentsModel<T>;
-  protected shadowSheet: StyleSheet;
-  protected top: HTMLElement;
+    protected model: ContentsModel<T>;
+    protected shadowSheet: StyleSheet;
+    protected top: HTMLElement;
 
-  private _initialized: boolean = false;
-  private _initializedListeners: boolean = false;
+    private _initialized: boolean = false;
+    private _initializedListeners: boolean = false;
 }
 
 // export namespace TreeFinderBreadcrumbsElement {
 // }
 
-customElements.define("tree-finder-breadcrumbs", TreeFinderBreadcrumbsElement);
+if (
+    document.createElement("tree-finder-breadcrumbs").constructor ===
+    HTMLElement
+) {
+    customElements.define(
+        "tree-finder-breadcrumbs",
+        TreeFinderBreadcrumbsElement,
+    );
+}

@@ -1,25 +1,27 @@
 {
-  "name": "simple",
-  "private": true,
-  "version": "0.1.0",
-  "description": "An example app built using tree-finder.",
-  "scripts": {
-    "build": "tsc --build",
-    "build:watch": "tsc --build --watch",
-    "clean": "rimraf dist lib types *.tsbuildinfo",
-    "clean:slate": "yarn run clean && rimraf node_modules",
-    "start": "webpack serve",
-    "start:chromium": "webpack serve --open 'chromium'",
-    "start:prod": "NODE_ENV=production webpack serve",
-    "watch": "npm-run-all -p *:watch",
-    "webpack": "webpack --color",
-    "webpack:prod": "NODE_ENV=production webpack --color",
-    "webpack:watch": "webpack --color --watch"
-  },
-  "keywords": [],
-  "license": "BSD-3-Clause",
-  "dependencies": {
-    "@tree-finder/base": "^0.1.0",
-    "@tree-finder/mockcontents": "^0.1.0"
-  }
+    "name": "simple",
+    "private": true,
+    "version": "0.1.0",
+    "description": "An example app built using tree-finder.",
+    "scripts": {
+        "build": "tsc --build",
+        "build:watch": "tsc --build --watch",
+        "clean": "rimraf dist lib types *.tsbuildinfo",
+        "clean:slate": "yarn run clean && rimraf node_modules",
+        "lint": "prettier --check \"src/**/*.ts\" \"*.js\" \"*.json\"",
+        "fix": "prettier --write  \"src/**/*.ts\" \"*.js\" \"*.json\"",
+        "start": "webpack serve",
+        "start:chromium": "webpack serve --open 'chromium'",
+        "start:prod": "NODE_ENV=production webpack serve",
+        "watch": "npm-run-all -p *:watch",
+        "webpack": "webpack --color",
+        "webpack:prod": "NODE_ENV=production webpack --color",
+        "webpack:watch": "webpack --color --watch"
+    },
+    "keywords": [],
+    "license": "BSD-3-Clause",
+    "dependencies": {
+        "@tree-finder/base": "0.1.0",
+        "@tree-finder/mockcontents": "0.1.0"
+    }
 }

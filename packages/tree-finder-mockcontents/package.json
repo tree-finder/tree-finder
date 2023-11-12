@@ -1,46 +1,47 @@
 {
-  "name": "@tree-finder/mockcontents",
-  "version": "0.1.0",
-  "description": "browser/tree widget implemented as a custom DOM element. Built on top of regular-table",
-  "homepage": "https://github.com/tree-finder/tree-finder",
-  "bugs": {
-    "url": "https://github.com/tree-finder/tree-finder/issues"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/tree-finder/tree-finder.git"
-  },
-  "license": "BSD-3-Clause",
-  "author": "Max Klein <telamonian@users.noreply.github.com>",
-  "files": [
-    "dist/**/*",
-    "src/**/*",
-    "style/**/*.{css,eot,gif,html,jpg,json,less,png,scss,svg,ttf,woff2}",
-    "types/**/*"
-  ],
-  "main": "dist/tree-finder-mockcontents.js",
-  "types": "types/index.d.ts",
-  "sideEffects": [
-    "style/**/*"
-  ],
-  "scripts": {
-    "build": "tsc --build",
-    "build:watch": "tsc --build --watch",
-    "clean": "rimraf dist lib types *.tsbuildinfo",
-    "clean:slate": "yarn run clean && rimraf node_modules",
-    "postpack": "shx rm README.md LICENSE",
-    "prepack": "shx cp ../../README.md . && shx cp ../../LICENSE .",
-    "prepublishOnly": "npm run clean && npm run build && npm run webpack:prod",
-    "watch": "npm-run-all -p *:watch",
-    "webpack": "webpack --color",
-    "webpack:prod": "NODE_ENV=production webpack --color",
-    "webpack:watch": "webpack --color --watch"
-  },
-  "dependencies": {
-    "faker": "^6.6.6",
-    "@tree-finder/base": "^0.1.0"
-  },
-  "publishConfig": {
-    "access": "public"
-  }
+    "name": "@tree-finder/mockcontents",
+    "version": "0.1.0",
+    "description": "browser/tree widget implemented as a custom DOM element. Built on top of regular-table",
+    "homepage": "https://github.com/tree-finder/tree-finder",
+    "bugs": {
+        "url": "https://github.com/tree-finder/tree-finder/issues"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/tree-finder/tree-finder.git"
+    },
+    "license": "BSD-3-Clause",
+    "author": "Max Klein <telamonian@users.noreply.github.com>",
+    "files": [
+        "dist/**/*",
+        "src/**/*",
+        "style/**/*.{css,eot,gif,html,jpg,json,less,png,scss,svg,ttf,woff2}",
+        "types/**/*"
+    ],
+    "main": "dist/tree-finder-mockcontents.js",
+    "types": "types/index.d.ts",
+    "sideEffects": [
+        "style/**/*"
+    ],
+    "scripts": {
+        "build": "tsc --build",
+        "build:watch": "tsc --build --watch",
+        "clean": "rimraf dist lib types *.tsbuildinfo",
+        "lint": "prettier --check \"src/**/*.ts\" \"*.js\" \"*.json\"",
+        "fix": "prettier --write  \"src/**/*.ts\" \"*.js\" \"*.json\"",
+        "postpack": "shx rm README.md LICENSE",
+        "prepack": "shx cp ../../README.md . && shx cp ../../LICENSE .",
+        "prepublishOnly": "npm run clean && npm run build && npm run webpack:prod",
+        "watch": "npm-run-all -p *:watch",
+        "webpack": "webpack --color",
+        "webpack:prod": "NODE_ENV=production webpack --color",
+        "webpack:watch": "webpack --color --watch"
+    },
+    "dependencies": {
+        "faker": "^6.6.6",
+        "@tree-finder/base": "^0.1.0"
+    },
+    "publishConfig": {
+        "access": "public"
+    }
 }

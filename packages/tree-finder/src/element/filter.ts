@@ -8,45 +8,49 @@ import { IContentRow } from "../content";
 import { ContentsModel } from "../model";
 import { Tag } from "../util";
 
-export class TreeFinderFilterElement<T extends IContentRow> extends HTMLElement {
-  clear() {
-    this.innerHTML = `<input class="tf-filter-input"></input>`;
+export class TreeFinderFilterElement<
+    T extends IContentRow,
+> extends HTMLElement {
+    clear() {
+        this.innerHTML = `<input class="tf-filter-input"></input>`;
 
-    [this._input] = this.children as any as [HTMLInputElement];
-  }
-
-  connectedCallback() {
-    if (!this._initialized) {
-      this.create_shadow_dom();
-
-      this._initialized = true;
+        [this._input] = this.children as any as [HTMLInputElement];
     }
 
-    if (!this._initializedListeners) {
-      this.addEventListener("input", event => this.onInput(event as InputEvent));
+    connectedCallback() {
+        if (!this._initialized) {
+            this.create_shadow_dom();
 
-      this._initializedListeners = true;
+            this._initialized = true;
+        }
+
+        if (!this._initializedListeners) {
+            this.addEventListener("input", (event) =>
+                this.onInput(event as InputEvent),
+            );
+
+            this._initializedListeners = true;
+        }
     }
-  }
 
-  init(model: ContentsModel<T>, ix: number = 0) {
-    this.model = model;
+    init(model: ContentsModel<T>, ix: number = 0) {
+        this.model = model;
 
-    this.clear();
+        this.clear();
 
-    if (ix === 0) {
-      this._col = "path";
-    } else {
-      this._col = this.model.columns[ix - 1];
+        if (ix === 0) {
+            this._col = "path";
+        } else {
+            this._col = this.model.columns[ix - 1];
+        }
     }
-  }
 
-  create_shadow_dom() {
-    this.attachShadow({mode: "open"});
+    create_shadow_dom() {
+        this.attachShadow({ mode: "open" });
 
-    const inputSlot = `<slot></slot>`;
+        const inputSlot = `<slot></slot>`;
 
-    this.shadowRoot!.innerHTML = Tag.html`
+        this.shadowRoot!.innerHTML = Tag.html`
       <style>
         :host > .tf-filter-top {
           display: inline-block;
@@ -59,42 +63,54 @@ export class TreeFinderFilterElement<T extends IContentRow> extends HTMLElement 
       </div>
     `;
 
-    [this.shadowSheet, this.top] = this.shadowRoot!.children as any as [StyleSheet, HTMLElement];
-  }
+        [this.shadowSheet, this.top] = this.shadowRoot!.children as any as [
+            StyleSheet,
+            HTMLElement,
+        ];
+    }
 
-  onInput(event: InputEvent) {
-    const fpat = {col: this._col, pattern: (event.target as HTMLInputElement).value};
-    this.model.filterCol = this._col;
-    this.model.onFilterInput(fpat);
-  }
+    onInput(event: InputEvent) {
+        const fpat = {
+            col: this._col,
+            pattern: (event.target as HTMLInputElement).value,
+        };
+        this.model.filterCol = this._col;
+        this.model.onFilterInput(fpat);
+    }
 
-  get col() {
-    return this._col;
-  }
+    get col() {
+        return this._col;
+    }
 
-  get input() {
-    return this._input;
-  }
+    get input() {
+        return this._input;
+    }
 
-  protected _col: keyof T;
-  protected _input: HTMLInputElement;
+    protected _col: keyof T;
+    protected _input: HTMLInputElement;
 
-  protected model: ContentsModel<T>;
-  protected shadowSheet: StyleSheet;
-  protected top: HTMLElement;
+    protected model: ContentsModel<T>;
+    protected shadowSheet: StyleSheet;
+    protected top: HTMLElement;
 
-  private _initialized: boolean = false;
-  private _initializedListeners: boolean = false;
+    private _initialized: boolean = false;
+    private _initializedListeners: boolean = false;
 }
 
 export namespace TreeFinderFilterElement {
-  export function get() {
-    if (document.createElement("tree-finder-filter").constructor === HTMLElement) {
-      customElements.define("tree-finder-filter", TreeFinderFilterElement);
-    }
+    export function get() {
+        if (
+            document.createElement("tree-finder-filter").constructor ===
+            HTMLElement
+        ) {
+            customElements.define(
+                "tree-finder-filter",
+                TreeFinderFilterElement,
+            );
+        }
 
-    return customElements.get('tree-finder-filter');
-  }
+        return customElements.get("tree-finder-filter");
+    }
 }
 
 TreeFinderFilterElement.get();

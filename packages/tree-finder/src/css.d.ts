@@ -5,19 +5,19 @@
  * the BSD 3 Clause license. The full license can be found in the LICENSE file.
  */
 // for pure css
-declare module '*.css' {
-  const classes: {[key: string]: string};
-  export default classes;
+declare module "*.css" {
+    const classes: { [key: string]: string };
+    export default classes;
 }
 
 // for less
 declare module "*.less" {
-  const classes: {[key: string]: string};
-  export default classes;
+    const classes: { [key: string]: string };
+    export default classes;
 }
 
 // for scss
 declare module "*.scss" {
-  const classes: {[key: string]: string};
-  export default classes;
+    const classes: { [key: string]: string };
+    export default classes;
 }

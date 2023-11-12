@@ -10,49 +10,53 @@ import { Tag } from "../util";
 
 import { TreeFinderFilterElement } from "./filter";
 
-export class TreeFinderFiltersElement<T extends IContentRow> extends HTMLElement {
-  clear() {
-    this.innerHTML = `<tree-finder-filter></tree-finder-filter>`.repeat(this.model.columns.length + 1);
+export class TreeFinderFiltersElement<
+    T extends IContentRow,
+> extends HTMLElement {
+    clear() {
+        this.innerHTML = `<tree-finder-filter></tree-finder-filter>`.repeat(
+            this.model.columns.length + 1,
+        );
 
-    this.filters = [...this.children] as TreeFinderFilterElement<T>[];
-  }
-
-  connectedCallback() {
-    if (!this._initialized) {
-      this.create_shadow_dom();
-
-      this._initialized = true;
+        this.filters = [...this.children] as TreeFinderFilterElement<T>[];
     }
 
-    // if (!this._initializedListeners) {
-    //   this.addEventListener("mouseup", event => this.onClick(event));
+    connectedCallback() {
+        if (!this._initialized) {
+            this.create_shadow_dom();
 
-    //   this._initializedListeners = true;
-    // }
-  }
+            this._initialized = true;
+        }
 
-  init(model: ContentsModel<T>) {
-    if (!this._initialized) {
-      this.create_shadow_dom();
+        // if (!this._initializedListeners) {
+        //   this.addEventListener("mouseup", event => this.onClick(event));
 
-      this._initialized = true;
+        //   this._initializedListeners = true;
+        // }
     }
 
-    this.model = model;
+    init(model: ContentsModel<T>) {
+        if (!this._initialized) {
+            this.create_shadow_dom();
 
-    this.clear();
+            this._initialized = true;
+        }
 
-    for (const [index, element] of this.filters.entries()) {
-      element.init(model, index);
+        this.model = model;
+
+        this.clear();
+
+        for (const [index, element] of this.filters.entries()) {
+            element.init(model, index);
+        }
     }
-  }
 
-  create_shadow_dom() {
-    this.attachShadow({mode: "open"});
+    create_shadow_dom() {
+        this.attachShadow({ mode: "open" });
 
-    const filterSlot = `<slot></slot>`;
+        const filterSlot = `<slot></slot>`;
 
-    this.shadowRoot!.innerHTML = Tag.html`
+        this.shadowRoot!.innerHTML = Tag.html`
       <style>
       </style>
       <div class="tf-filters-top">
@@ -60,31 +64,36 @@ export class TreeFinderFiltersElement<T extends IContentRow> extends HTMLElement
       </div>
     `;
 
-    [this.shadowSheet, this.top] = this.shadowRoot!.children as any as [StyleSheet, HTMLElement];
-  }
+        [this.shadowSheet, this.top] = this.shadowRoot!.children as any as [
+            StyleSheet,
+            HTMLElement,
+        ];
+    }
 
-  entries() {
-    return this.filters.entries();
-  }
+    entries() {
+        return this.filters.entries();
+    }
 
-  getChild(ix: number): TreeFinderFilterElement<T> {
-    return this.filters[ix];
-  }
+    getChild(ix: number): TreeFinderFilterElement<T> {
+        return this.filters[ix];
+    }
 
-  getInput(ix: number): HTMLInputElement {
-    return this.getChild(ix)?.input;
-  }
+    getInput(ix: number): HTMLInputElement {
+        return this.getChild(ix)?.input;
+    }
 
-  protected filters: TreeFinderFilterElement<T>[];
-  protected model: ContentsModel<T>;
-  protected shadowSheet: StyleSheet;
-  protected top: HTMLElement;
+    protected filters: TreeFinderFilterElement<T>[];
+    protected model: ContentsModel<T>;
+    protected shadowSheet: StyleSheet;
+    protected top: HTMLElement;
 
-  private _initialized: boolean = false;
-  // private _initializedListeners: boolean = false;
+    private _initialized: boolean = false;
+    // private _initializedListeners: boolean = false;
 }
 
 // export namespace TreeFinderFiltersElement {
 // }
 
-customElements.define("tree-finder-filters", TreeFinderFiltersElement);
+if (document.createElement("tree-finder-filters").constructor === HTMLElement) {
+    customElements.define("tree-finder-filters", TreeFinderFiltersElement);
+}

@@ -13,68 +13,86 @@ import { TreeFinderFiltersElement } from "./filters";
 import { TreeFinderGridElement } from "./grid";
 
 export class TreeFinderPanelElement<T extends IContentRow> extends HTMLElement {
-  connectedCallback() {
-    if (!this._initialized) {
-      this.create_shadow_dom();
-      this._initialized = true;
+    connectedCallback() {
+        if (!this._initialized) {
+            this.create_shadow_dom();
+            this._initialized = true;
+        }
     }
-  }
 
-  clear() {
-    this.innerHTML = Tag.html`
+    clear() {
+        this.innerHTML = Tag.html`
       <tree-finder-breadcrumbs class="tf-panel-breadcrumbs" slot="breadcrumbs"></tree-finder-breadcrumbs>
-      ${this.options.showFilter ? `<tree-finder-filters class="tf-panel-filters" slot="filters"></tree-finder-filters>` : `<div slot="filters"></div>`}
+      ${
+          this.options.showFilter
+              ? `<tree-finder-filters class="tf-panel-filters" slot="filters"></tree-finder-filters>`
+              : `<div slot="filters"></div>`
+      }
       <tree-finder-grid class="tf-panel-grid" slot="grid"></tree-finder-grid>
     `;
 
-    [this.breadcrumbs, this.filters, this.grid] = this.children as any as [TreeFinderBreadcrumbsElement<T>, TreeFinderFiltersElement<T>, TreeFinderGridElement<T>];
-  }
-
-  async init({root, options = {}, modelOptions = {}, gridOptions = {}}: {root: T, options?: TreeFinderPanelElement.IOptions<T>, modelOptions?: ContentsModel.IOptions<T>, gridOptions?: TreeFinderGridElement.IOptions<T>}) {
-    this.options = options;
-
-    this.clear();
-
-    if (this._options.showFilter) {
-      modelOptions.needsWidths = true;
+        [this.breadcrumbs, this.filters, this.grid] = this.children as any as [
+            TreeFinderBreadcrumbsElement<T>,
+            TreeFinderFiltersElement<T>,
+            TreeFinderGridElement<T>,
+        ];
     }
-    this._model = new ContentsModel(root, modelOptions);
 
-    this.breadcrumbs.init(this._model);
-    if (this.options.showFilter) {
-      this.filters.init(this._model);
-    }
-    this.grid.init(this._model, gridOptions);
+    async init({
+        root,
+        options = {},
+        modelOptions = {},
+        gridOptions = {},
+    }: {
+        root: T;
+        options?: TreeFinderPanelElement.IOptions<T>;
+        modelOptions?: ContentsModel.IOptions<T>;
+        gridOptions?: TreeFinderGridElement.IOptions<T>;
+    }) {
+        this.options = options;
 
-    this._model.columnWidthsSub.subscribe(widths => {
-      if (!widths.length) {
-        return;
-      }
+        this.clear();
 
-      this.filters.getChild(0).style.marginLeft = '12px';
-      for (const [ix, width] of widths.entries()) {
-        const input = this.filters.getInput(ix);
-        if (input) {
-          input.style.width = width;
+        if (this._options.showFilter) {
+            modelOptions.needsWidths = true;
         }
-      }
-    });
+        this._model = new ContentsModel(root, modelOptions);
 
-    await this.draw();
-  }
+        this.breadcrumbs.init(this._model);
+        if (this.options.showFilter) {
+            this.filters.init(this._model);
+        }
+        this.grid.init(this._model, gridOptions);
 
-  async draw() {
-    await this.grid.draw();
-  }
+        this._model.columnWidthsSub.subscribe((widths) => {
+            if (!widths.length) {
+                return;
+            }
 
-  create_shadow_dom() {
-    this.attachShadow({mode: "open"});
+            this.filters.getChild(0).style.marginLeft = "12px";
+            for (const [ix, width] of widths.entries()) {
+                const input = this.filters.getInput(ix);
+                if (input) {
+                    input.style.width = width;
+                }
+            }
+        });
 
-    const breadcrumbsSlot = `<slot name="breadcrumbs"></slot>`;
-    const filterSlot = `<slot name="filters"></slot>`;
-    const gridSlot = `<slot name="grid"></slot>`;
+        await this.draw();
+    }
 
-    this.shadowRoot!.innerHTML = Tag.html`
+    async draw() {
+        await this.grid.draw();
+    }
+
+    create_shadow_dom() {
+        this.attachShadow({ mode: "open" });
+
+        const breadcrumbsSlot = `<slot name="breadcrumbs"></slot>`;
+        const filterSlot = `<slot name="filters"></slot>`;
+        const gridSlot = `<slot name="grid"></slot>`;
+
+        this.shadowRoot!.innerHTML = Tag.html`
       <style>
         :host {
           display: flex;
@@ -101,47 +119,57 @@ export class TreeFinderPanelElement<T extends IContentRow> extends HTMLElement {
       </div>
     `;
 
-    [this.shadowSheet, this.breadcrumbsContainer, this.filterContainer, this.gridContainer] = this.shadowRoot!.children as any as [StyleSheet, HTMLElement, HTMLElement, HTMLElement];
-  }
-
-  get model() {
-    return this._model;
-  }
-
-  get options() {
-    return {...this._options};
-  }
-
-  set options({
-    showFilter = false,
-  } : TreeFinderPanelElement.IOptions<T>) {
-    this._options = {
-      showFilter
+        [
+            this.shadowSheet,
+            this.breadcrumbsContainer,
+            this.filterContainer,
+            this.gridContainer,
+        ] = this.shadowRoot!.children as any as [
+            StyleSheet,
+            HTMLElement,
+            HTMLElement,
+            HTMLElement,
+        ];
     }
-  }
 
-  protected shadowSheet: StyleSheet;
-  protected breadcrumbsContainer: HTMLElement;
-  protected filterContainer: HTMLElement;
-  protected gridContainer: HTMLElement;
+    get model() {
+        return this._model;
+    }
 
-  protected breadcrumbs: TreeFinderBreadcrumbsElement<T>;
-  protected filters: TreeFinderFiltersElement<T>;
-  protected grid: TreeFinderGridElement<T>;
+    get options() {
+        return { ...this._options };
+    }
 
-  protected _options: TreeFinderPanelElement.IOptions<T>;
-  protected _model: ContentsModel<T>;
+    set options({ showFilter = false }: TreeFinderPanelElement.IOptions<T>) {
+        this._options = {
+            showFilter,
+        };
+    }
 
-  private _initialized: boolean = false;
+    protected shadowSheet: StyleSheet;
+    protected breadcrumbsContainer: HTMLElement;
+    protected filterContainer: HTMLElement;
+    protected gridContainer: HTMLElement;
+
+    protected breadcrumbs: TreeFinderBreadcrumbsElement<T>;
+    protected filters: TreeFinderFiltersElement<T>;
+    protected grid: TreeFinderGridElement<T>;
+
+    protected _options: TreeFinderPanelElement.IOptions<T>;
+    protected _model: ContentsModel<T>;
+
+    private _initialized: boolean = false;
 }
 
 export namespace TreeFinderPanelElement {
-  export interface IOptions<T extends IContentRow> {
-    /**
-     * if true, add filter inputs in a separate widget above the tree-finder-grid
-     */
-     showFilter?: boolean;
-  }
+    export interface IOptions<T extends IContentRow> {
+        /**
+         * if true, add filter inputs in a separate widget above the tree-finder-grid
+         */
+        showFilter?: boolean;
+    }
 }
 
-customElements.define("tree-finder-panel", TreeFinderPanelElement);
+if (document.createElement("tree-finder-panel").constructor === HTMLElement) {
+    customElements.define("tree-finder-panel", TreeFinderPanelElement);
+}

@@ -10,17 +10,17 @@
 // }
 
 thead tr:last-child th:hover {
-  background: var(--tf-row-hover-background);
-  color: var(--tf-row-hover-color);
-  opacity: 1;
+    background: var(--tf-row-hover-background);
+    color: var(--tf-row-hover-color);
+    opacity: 1;
 }
 
 .tf-header-align-left {
-  text-align: left;
+    text-align: left;
 }
 
 .tf-header-align-right {
-  text-align: right;
+    text-align: right;
 }
 
 // set path col header using pseudoelement
@@ -31,38 +31,37 @@ thead tr:last-child th:hover {
 // }
 
 .tf-header {
-  border-right: 1px solid #ddd;
-  display: inline-grid;
-  grid-template-columns: auto 20px;
-  grid-template-areas:
-    "name sort";
-  width: 100%;
+    border-right: 1px solid #ddd;
+    display: inline-grid;
+    grid-template-columns: auto 20px;
+    grid-template-areas: "name sort";
+    width: 100%;
 }
 
 .tf-header-input {
-  grid-area: input;
-  width: calc(100% - 5px);
+    grid-area: input;
+    width: calc(100% - 5px);
 }
 
 .tf-header-name {
-  grid-area: name;
+    grid-area: name;
 }
 
 .tf-header-sort {
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: 10px;
-  min-width: 16px;
-  min-height: 16px;
-  color: var(--tf-background);
-  content: "";
-  grid-area: sort;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 10px;
+    min-width: 16px;
+    min-height: 16px;
+    color: var(--tf-background);
+    content: "";
+    grid-area: sort;
 }
 
 .tf-header-sort-desc {
-  background-image: var(--tf-caret-down);
+    background-image: var(--tf-caret-down);
 }
 
 .tf-header-sort-asc {
-  background-image: var(--tf-caret-up);
+    background-image: var(--tf-caret-up);
 }
