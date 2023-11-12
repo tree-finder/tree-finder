@@ -82,3 +82,20 @@ import "@tree-finder/base/style/theme/material.css";
   ```
 
 `yarn start` will launch a dev server. Open the url it supplies in any browser in order to view the example. While the dev server is running, any changes you make to the source code (ie any `.ts` or `.less` files) will trigger a rebuild, and the example will automatically reload in your browser.
+
+
+## Data Model
+
+A `tree-finder` instance should be inited with a root directory:
+
+```javascript
+  await treeFinder.init({
+    root,
+    gridOptions: {
+      doWindowResize: true,
+      showFilter: true,
+    },
+  });
+```
+
+Starting from the root, objects should contain at least the field `kind` which will be `dir` for directory, or another file type (e.g. `text`). For directories, it should have a method `async getChildren` to get the contents of that directory.

@@ -3,18 +3,39 @@
   "license": "BSD-3-Clause",
   "workspaces": {
     "packages": [
-      "examples/simple",
-      "packages/*"
+      "examples/**",
+      "packages/**"
     ]
   },
   "scripts": {
-    "build": "lerna run build",
-    "clean": "lerna run clean",
-    "clean:slate": "lerna run clean:slate && rimraf node_modules",
+    "build:base": "yarn workspace @tree-finder/base build",
+    "build:mockcontents": "yarn workspace @tree-finder/mockcontents build",
+    "build:examples-simple": "yarn workspace simple build",
+    "build": "npm-run-all build:*",
+    "clean:base": "yarn workspace @tree-finder/base clean",
+    "clean:mockcontents": "yarn workspace @tree-finder/mockcontents clean",
+    "clean:examples-simple": "yarn workspace simple clean",
+    "clean": "npm-run-all clean:*",
     "integrity": "yarn install && yarn-deduplicate && yarn install",
+    "lint:base": "yarn workspace @tree-finder/base lint",
+    "lint:mockcontents": "yarn workspace @tree-finder/mockcontents lint",
+    "lint:examples-simple": "yarn workspace simple lint",
+    "lint": "npm-run-all lint:*",
+    "fix:base": "yarn workspace @tree-finder/base fix",
+    "fix:mockcontents": "yarn workspace @tree-finder/mockcontents fix",
+    "fix:examples-simple": "yarn workspace simple fix",
+    "fix": "npm-run-all fix:*",
+    "start:simple": "yarn workspace simple start",
+    "start": "npm-run-all -s webpack start:simple",
     "test": "yarn workspace @tree-finder/base test",
-    "webpack": "lerna run webpack",
-    "webpack:prod": "lerna run webpack:prod"
+    "webpack:dev:base": "yarn workspace @tree-finder/base webpack",
+    "webpack:dev:mockcontents": "yarn workspace @tree-finder/mockcontents webpack",
+    "webpack:dev:simple": "yarn workspace simple webpack",
+    "webpack": "npm-run-all webpack:dev:*",
+    "webpack:prod:base": "yarn workspace @tree-finder/base webpack:prod",
+    "webpack:prod:mockcontents": "yarn workspace @tree-finder/mockcontents webpack:prod",
+    "webpack:prod:simple": "yarn workspace simple webpack:prod",
+    "webpack:prod": "npm-run-all webpack:prod:*"
   },
   "devDependencies": {
     "@playwright/test": "^1.33.0",
@@ -31,6 +52,7 @@
     "npm-run-all": "^4.1.5",
     "playwright": "^1.33.0",
     "postcss-loader": "^7.3.0",
+    "prettier": "^3.0.3",
     "rimraf": "^5.0.1",
     "shx": "^0.3.4",
     "source-map-loader": "^4.0.1",
