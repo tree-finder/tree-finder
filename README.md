@@ -8,7 +8,8 @@
 </p>
 
 <p align="center">
-  <a href="https://www.npmjs.com/package/tree-finder"><img alt="NPM Version" src="https://img.shields.io/npm/v/tree-finder.svg?color=brightgreen&style=flat-square"></a>
+  <a href="https://github.com/tree-finder/tree-finder/actions/workflows/build.yml?query=workflow%3A%22%5C%22Build%22"><img alt="Build Status" src="https://github.com/tree-finder/tree-finder/actions/workflows/build.yml/badge.svg?branch=master"></a>
+  <a href="https://www.npmjs.com/package/@tree-finder/base"><img alt="NPM Version" src="https://img.shields.io/npm/v/@tree-finder/base.svg?color=brightgreen&style=flat-square"></a>
 </p>
 
 A Javascript library for the browser, [`tree-finder`](https://github.com/tree-finder/tree-finder) exports
