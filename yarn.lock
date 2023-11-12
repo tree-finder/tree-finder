@@ -6146,10 +6146,10 @@ regexp.prototype.flags@^1.5.1:
     define-properties "^1.2.0"
     set-function-name "^2.0.0"
 
-regular-table@^0.5.6:
-  version "0.5.9"
-  resolved "https://registry.yarnpkg.com/regular-table/-/regular-table-0.5.9.tgz#a5bfeeb67e3bcc9ab4e9f11cd9c3a40777267aa9"
-  integrity sha512-Ck5HYNS7lzsxsDWDBYzrCpwM1wsp5fMY42Ks730Otwq2U+XAlARJMg2tRexy+V8bLy9wiq+SH8EMC/yKqccLCA==
+regular-table@^0.6.3:
+  version "0.6.3"
+  resolved "https://registry.yarnpkg.com/regular-table/-/regular-table-0.6.3.tgz#a7b329178c23ceb69e9bcf3dabadca69e1bdb8c3"
+  integrity sha512-esS+UzNy26gAFDpy2o/h1B+s/BrFZj6KJOGie7Y/84+PPcpnsPUGV7Z/msQyyuHSOAixUHgHRe2Bqe9YcxFqGA==
 
 relateurl@^0.2.7:
   version "0.2.7"
