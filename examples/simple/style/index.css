@@ -5,8 +5,8 @@
  * the BSD 3 Clause license. The full license can be found in the LICENSE file.
  */
 
-@import url('~tree-finder/dist/tree-finder.css');
-@import url('~tree-finder/dist/theme/material.css');
+@import url('~@tree-finder/base/dist/tree-finder.css');
+@import url('~@tree-finder/base/dist/theme/material.css');
 
 body {
   margin-right: 0;
