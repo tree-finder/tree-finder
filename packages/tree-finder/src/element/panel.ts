@@ -170,4 +170,6 @@ export namespace TreeFinderPanelElement {
     }
 }
 
-customElements.define("tree-finder-panel", TreeFinderPanelElement);
+if (document.createElement("tree-finder-panel").constructor === HTMLElement) {
+    customElements.define("tree-finder-panel", TreeFinderPanelElement);
+}

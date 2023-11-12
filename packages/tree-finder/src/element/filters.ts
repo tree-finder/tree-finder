@@ -94,4 +94,6 @@ export class TreeFinderFiltersElement<
 // export namespace TreeFinderFiltersElement {
 // }
 
-customElements.define("tree-finder-filters", TreeFinderFiltersElement);
+if (document.createElement("tree-finder-filters").constructor === HTMLElement) {
+    customElements.define("tree-finder-filters", TreeFinderFiltersElement);
+}

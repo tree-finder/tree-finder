@@ -546,4 +546,6 @@ export namespace TreeFinderGridElement {
     }
 }
 
-customElements.define("tree-finder-grid", TreeFinderGridElement);
+if (document.createElement("tree-finder-grid").constructor === HTMLElement) {
+    customElements.define("tree-finder-grid", TreeFinderGridElement);
+}

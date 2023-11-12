@@ -83,4 +83,12 @@ export class TreeFinderBreadcrumbsElement<
 // export namespace TreeFinderBreadcrumbsElement {
 // }
 
-customElements.define("tree-finder-breadcrumbs", TreeFinderBreadcrumbsElement);
+if (
+    document.createElement("tree-finder-breadcrumbs").constructor ===
+    HTMLElement
+) {
+    customElements.define(
+        "tree-finder-breadcrumbs",
+        TreeFinderBreadcrumbsElement,
+    );
+}
