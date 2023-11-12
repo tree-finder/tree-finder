@@ -137,7 +137,7 @@ export class ContentsModel<T extends IContentRow> {
         this._contents.splice(rix + 1, npop);
         content.collapse();
 
-        this.requestDraw({ autosize: true });
+        this.requestDraw();
     }
 
     async expand(rix: number) {
@@ -157,7 +157,7 @@ export class ContentsModel<T extends IContentRow> {
         });
         this._contents.splice(rix + 1, 0, ...nodeContents);
 
-        this.requestDraw({ autosize: true });
+        this.requestDraw();
     }
 
     async filter({ autosize = true }: { autosize?: boolean } = {}) {
