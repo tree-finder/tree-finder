@@ -8,153 +8,159 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const path = require("path");
 const RemoveEmptyScriptsPlugin = require("webpack-remove-empty-scripts");
 
-const { dependencySrcMapRules, stylingRules, svgUrlRules, getContext, getOptimization, getResolve, tsRules } = require("../../webpack.rules");
+const {
+    dependencySrcMapRules,
+    stylingRules,
+    svgUrlRules,
+    getContext,
+    getOptimization,
+    getResolve,
+    tsRules,
+} = require("../../webpack.rules");
 
 const isProd = process.env.NODE_ENV === "production";
 
 const treeFinderConfig = {
-  entry: {
-    "tree-finder": "src/index.ts",
-  },
-  devtool: "source-map",
-  ...getContext(__dirname),
+    entry: {
+        "tree-finder": "src/index.ts",
+    },
+    devtool: "source-map",
+    ...getContext(__dirname),
 
-  output: {
-    path: path.resolve(__dirname, "dist"),
-    publicPath: "/dist/",
+    output: {
+        path: path.resolve(__dirname, "dist"),
+        publicPath: "/dist/",
 
-    // filename: "[name].js",
-    libraryTarget: "umd",
+        // filename: "[name].js",
+        libraryTarget: "umd",
 
-    // use a unique name for each chunk
-    // filename: "[name].[chunkhash].js",
-  },
+        // use a unique name for each chunk
+        // filename: "[name].[chunkhash].js",
+    },
 
-  module: {
-    rules: [
-      ...dependencySrcMapRules,
-      ...stylingRules,
-      ...svgUrlRules,
-      ...tsRules,
-    ],
-  },
+    module: {
+        rules: [
+            ...dependencySrcMapRules,
+            ...stylingRules,
+            ...svgUrlRules,
+            ...tsRules,
+        ],
+    },
 
-  resolve: {
-    ...getResolve(__dirname),
-  },
+    resolve: {
+        ...getResolve(__dirname),
+    },
 
-  plugins: [
-    new MiniCssExtractPlugin(),
-  ],
+    plugins: [new MiniCssExtractPlugin()],
 
-  mode: isProd ? "production": "development",
+    mode: isProd ? "production" : "development",
 
-  optimization: {
-    minimize: isProd,
-    ...isProd && getOptimization(),
-  },
+    optimization: {
+        minimize: isProd,
+        ...(isProd && getOptimization()),
+    },
 
-  // experiments: {
-  //   topLevelAwait: true,
-  // },
+    // experiments: {
+    //   topLevelAwait: true,
+    // },
 
-  // don"t include any external packages in bundle
-  // externals: [/^[a-z0-9@]/],
+    // don"t include any external packages in bundle
+    // externals: [/^[a-z0-9@]/],
 
-  // split the bundle into chunks
-  // optimization: {
-  //   splitChunks: {
-  //     chunks: "all"
-  //   }
-  // },
+    // split the bundle into chunks
+    // optimization: {
+    //   splitChunks: {
+    //     chunks: "all"
+    //   }
+    // },
 };
 
 const treeFinderStyleConfig = {
-  entry: {
-    "tree-finder": "style/index.less",
-  },
-  devtool: "source-map",
-  ...getContext(__dirname),
+    entry: {
+        "tree-finder": "style/index.less",
+    },
+    devtool: "source-map",
+    ...getContext(__dirname),
 
-  output: {
-    path: path.resolve(__dirname, "dist"),
-    publicPath: "/dist/",
-  },
+    output: {
+        path: path.resolve(__dirname, "dist"),
+        publicPath: "/dist/",
+    },
 
-  module: {
-    rules: [
-      ...dependencySrcMapRules,
-      ...stylingRules,
-      ...svgUrlRules,
-      ...tsRules,
+    module: {
+        rules: [
+            ...dependencySrcMapRules,
+            ...stylingRules,
+            ...svgUrlRules,
+            ...tsRules,
+        ],
+    },
+
+    resolve: {
+        ...getResolve(__dirname),
+    },
+
+    plugins: [
+        // new FixStyleOnlyEntriesPlugin(),
+        new MiniCssExtractPlugin({
+            filename: "[name].css",
+        }),
+
+        new RemoveEmptyScriptsPlugin(),
     ],
-  },
 
-  resolve: {
-    ...getResolve(__dirname),
-  },
+    mode: isProd ? "production" : "development",
 
-  plugins: [
-    // new FixStyleOnlyEntriesPlugin(),
-    new MiniCssExtractPlugin({
-      filename: "[name].css",
-    }),
-
-    new RemoveEmptyScriptsPlugin(),
-  ],
-
-  mode: isProd ? "production": "development",
-
-  optimization: {
-    minimize: isProd,
-    ...isProd && getOptimization(),
-  },
+    optimization: {
+        minimize: isProd,
+        ...(isProd && getOptimization()),
+    },
 };
 
 const treeFinderThemeConfig = {
-  entry: {
-    "material": "style/theme/material.css",
-  },
-  devtool: "source-map",
-  ...getContext(__dirname),
+    entry: {
+        material: "style/theme/material.css",
+    },
+    devtool: "source-map",
+    ...getContext(__dirname),
 
-  output: {
-    path: path.resolve(__dirname, "dist/theme"),
-    publicPath: "/dist/",
-  },
+    output: {
+        path: path.resolve(__dirname, "dist/theme"),
+        publicPath: "/dist/",
+    },
 
-  module: {
-    rules: [
-      ...dependencySrcMapRules,
-      ...stylingRules,
-      ...svgUrlRules,
-      ...tsRules,
+    module: {
+        rules: [
+            ...dependencySrcMapRules,
+            ...stylingRules,
+            ...svgUrlRules,
+            ...tsRules,
+        ],
+    },
+
+    resolve: {
+        ...getResolve(__dirname),
+    },
+
+    plugins: [
+        // new FixStyleOnlyEntriesPlugin(),
+        new MiniCssExtractPlugin({
+            filename: "[name].css",
+        }),
+
+        new RemoveEmptyScriptsPlugin(),
     ],
-  },
 
-  resolve: {
-    ...getResolve(__dirname),
-  },
+    mode: isProd ? "production" : "development",
 
-  plugins: [
-    // new FixStyleOnlyEntriesPlugin(),
-    new MiniCssExtractPlugin({
-      filename: "[name].css",
-    }),
-
-    new RemoveEmptyScriptsPlugin(),
-  ],
-
-  mode: isProd ? "production": "development",
-
-  optimization: {
-    minimize: isProd,
-    ...isProd && getOptimization(),
-  },
+    optimization: {
+        minimize: isProd,
+        ...(isProd && getOptimization()),
+    },
 };
 
 module.exports = [
-  treeFinderConfig,
-  treeFinderStyleConfig,
-  treeFinderThemeConfig,
-]
+    treeFinderConfig,
+    treeFinderStyleConfig,
+    treeFinderThemeConfig,
+];

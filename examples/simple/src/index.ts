@@ -10,21 +10,21 @@ import { mockContent } from "@tree-finder/mockcontents";
 import "../style";
 
 const root = mockContent({
-  kind: "dir",
-  path: [],
-  randomize: true,
+    kind: "dir",
+    path: [],
+    randomize: true,
 });
 
 window.addEventListener("load", async () => {
-  const treeFinder = document.createElement<typeof root>("tree-finder-panel");
-  // const treeFinder = new TreeFinderPanelElement();
-  document.body.append(treeFinder);
+    const treeFinder = document.createElement<typeof root>("tree-finder-panel");
+    // const treeFinder = new TreeFinderPanelElement();
+    document.body.append(treeFinder);
 
-  await treeFinder.init({
-    root,
-    gridOptions: {
-      doWindowResize: true,
-      showFilter: true,
-    },
-  });
+    await treeFinder.init({
+        root,
+        gridOptions: {
+            doWindowResize: true,
+            showFilter: true,
+        },
+    });
 });

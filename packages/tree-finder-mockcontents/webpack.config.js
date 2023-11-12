@@ -6,42 +6,43 @@
  */
 const path = require("path");
 
-const { dependencySrcMapRules, getOptimization, getContext, getResolve, tsRules } = require("../../webpack.rules");
+const {
+    dependencySrcMapRules,
+    getOptimization,
+    getContext,
+    getResolve,
+    tsRules,
+} = require("../../webpack.rules");
 
 const isProd = process.env.NODE_ENV === "production";
 
 const treeFinderMockcontentsConfig = {
-  entry: {
-    "tree-finder-mockcontents": "src/index.ts",
-  },
-  devtool: "source-map",
-  ...getContext(__dirname),
+    entry: {
+        "tree-finder-mockcontents": "src/index.ts",
+    },
+    devtool: "source-map",
+    ...getContext(__dirname),
 
-  output: {
-    path: path.resolve(__dirname, "dist"),
-    publicPath: "/dist/",
-    libraryTarget: "umd",
-  },
+    output: {
+        path: path.resolve(__dirname, "dist"),
+        publicPath: "/dist/",
+        libraryTarget: "umd",
+    },
 
-  module: {
-    rules: [
-      ...dependencySrcMapRules,
-      ...tsRules,
-    ],
-  },
+    module: {
+        rules: [...dependencySrcMapRules, ...tsRules],
+    },
 
-  resolve: {
-    ...getResolve(__dirname),
-  },
+    resolve: {
+        ...getResolve(__dirname),
+    },
 
-  mode: isProd ? "production": "development",
+    mode: isProd ? "production" : "development",
 
-  optimization: {
-    minimize: isProd,
-    ...isProd && getOptimization(),
-  },
+    optimization: {
+        minimize: isProd,
+        ...(isProd && getOptimization()),
+    },
 };
 
-module.exports = [
-  treeFinderMockcontentsConfig,
-]
+module.exports = [treeFinderMockcontentsConfig];
