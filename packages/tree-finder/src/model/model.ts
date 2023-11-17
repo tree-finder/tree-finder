@@ -143,7 +143,7 @@ export class ContentsModel<T extends IContentRow> {
     async expand(rix: number) {
         const content = this._contents[rix];
 
-        content.expand();
+        await content.expand();
         for (const child of (await content?.getChildren()) ?? []) {
             this._parentMap.set(child.row, content.row);
         }
