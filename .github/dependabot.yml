@@ -4,7 +4,13 @@ updates:
     directory: "/"
     schedule:
       interval: "weekly"
-  - package-ecosystem: "yarn"
+    labels:
+      - "part: github_actions"
+
+  - package-ecosystem: "npm"
     directory: "/"
     schedule:
       interval: "monthly"
+    labels:
+      - "lang: javascript"
+      - "part: dependencies"
