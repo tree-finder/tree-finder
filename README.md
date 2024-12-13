@@ -1,5 +1,5 @@
 <p align="center">
-  <img alt="tree-finder" src="https://raw.githubusercontent.com/tree-finder/tree-finder/master/packages/tree-finder/style/icons/treeFinder.svg" width="300">
+  <img alt="tree-finder" src="https://raw.githubusercontent.com/tree-finder/tree-finder/main/packages/tree-finder/style/icons/treeFinder.svg" width="300">
 </p>
 
 
@@ -8,7 +8,7 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/tree-finder/tree-finder/actions/workflows/build.yml?query=workflow%3A%22%5C%22Build%22"><img alt="Build Status" src="https://github.com/tree-finder/tree-finder/actions/workflows/build.yml/badge.svg?branch=master"></a>
+  <a href="https://github.com/tree-finder/tree-finder/actions/workflows/build.yml"><img alt="Build Status" src="https://github.com/tree-finder/tree-finder/actions/workflows/build.yml/badge.svg?branch=main&event=push"></a>
   <a href="https://www.npmjs.com/package/@tree-finder/base"><img alt="NPM Version" src="https://img.shields.io/npm/v/@tree-finder/base.svg?color=brightgreen&style=flat-square"></a>
 </p>
 
@@ -45,7 +45,7 @@ which can be used to easily render filebrowers or other hierarchical trees. Only
 ||
 |:--|
 |basic|
-|[![basic](https://raw.githubusercontent.com/tree-finder/tree-finder/master/docs/basic_example.png)](https://bl.ocks.org/telamonian/330781ee64e02c514081851d272cd0a6)|
+|[![basic](https://raw.githubusercontent.com/tree-finder/tree-finder/main/docs/basic_example.png)](https://gist.github.com/telamonian/330781ee64e02c514081851d272cd0a6)|
 
 ## Installation
 
