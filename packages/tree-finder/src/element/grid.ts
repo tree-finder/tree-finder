@@ -32,10 +32,18 @@ export class TreeFinderGridElement<
         // Wait for the element to be fully initialized by regular-table's connectedCallback
         // This ensures table_model and internal structures are ready before we set up listeners
         // and that the element has proper dimensions for virtual scrolling to work correctly
-        await new Promise<void>((resolve) => {
+        await new Promise<void>((resolve, reject) => {
+            const startTime = Date.now();
+            const timeout = 5000; // 5 second timeout
             const checkReady = () => {
                 if ((this as any).table_model && this.offsetHeight > 0) {
                     resolve();
+                } else if (Date.now() - startTime > timeout) {
+                    reject(
+                        new Error(
+                            "TreeFinderGridElement: Timeout waiting for initialization",
+                        ),
+                    );
                 } else {
                     // If table_model doesn't exist yet or element has no size,
                     // wait for next frame to allow connectedCallback and layout to complete
