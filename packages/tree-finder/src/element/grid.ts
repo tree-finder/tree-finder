@@ -36,12 +36,17 @@ export class TreeFinderGridElement<
             const startTime = Date.now();
             const timeout = 5000; // 5 second timeout
             const checkReady = () => {
-                if ((this as any).table_model && this.offsetHeight > 0) {
+                const hasModel = !!(this as any).table_model;
+                const hasHeight = this.offsetHeight > 0;
+                const hasWidth = this.offsetWidth > 0;
+
+                if (hasModel && hasHeight && hasWidth) {
                     resolve();
                 } else if (Date.now() - startTime > timeout) {
                     reject(
                         new Error(
-                            "TreeFinderGridElement: Timeout waiting for initialization",
+                            `TreeFinderGridElement: Timeout waiting for initialization. ` +
+                                `table_model: ${hasModel}, height: ${this.offsetHeight}, width: ${this.offsetWidth}`,
                         ),
                     );
                 } else {
