@@ -28,6 +28,23 @@ export class TreeFinderGridElement<
     ) {
         this.model = model;
         this.options = options;
+
+        // Wait for the element to be fully initialized by regular-table's connectedCallback
+        // This ensures table_model and internal structures are ready before we set up listeners
+        // and that the element has proper dimensions for virtual scrolling to work correctly
+        await new Promise<void>((resolve) => {
+            const checkReady = () => {
+                if ((this as any).table_model && this.offsetHeight > 0) {
+                    resolve();
+                } else {
+                    // If table_model doesn't exist yet or element has no size,
+                    // wait for next frame to allow connectedCallback and layout to complete
+                    requestAnimationFrame(checkReady);
+                }
+            };
+            checkReady();
+        });
+
         // TODO: apply the setDataListener typing fix below, once regular-table has pulled in the relevant typing fixes upstream
         // this.setDataListener(this.dataListener.bind(this), {virtual_mode: this._options.virtual_mode});
         (this as any).setDataListener(this.dataListener.bind(this), {
