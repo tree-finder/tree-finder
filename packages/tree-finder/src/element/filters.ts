@@ -18,7 +18,9 @@ export class TreeFinderFiltersElement<
             this.model.columns.length + 1,
         );
 
-        this.filters = [...this.children] as TreeFinderFilterElement<T>[];
+        this.filters = Array.from(
+            this.children,
+        ) as TreeFinderFilterElement<T>[];
     }
 
     connectedCallback() {

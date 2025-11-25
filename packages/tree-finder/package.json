@@ -29,7 +29,7 @@
         "fix": "prettier --write  \"src/**/*.ts\" \"tests/**/*.js\" \"style/**/*.less\" \"*.js\" \"*.json\"",
         "postpack": "shx rm README.md LICENSE",
         "prepack": "shx cp ../../README.md . && shx cp ../../LICENSE .",
-        "prepublishOnly": "yarn run clean && yarn run webpack:prod",
+        "prepublishOnly": "pnpm run clean && pnpm run webpack:prod",
         "svgo": "svgo --config svgo.yaml",
         "svgo:uri": "svgo --config svgo.yaml --datauri=base64 -o -",
         "test:unit": "jest",
@@ -41,11 +41,8 @@
         "webpack:watch": "webpack --color --watch"
     },
     "dependencies": {
-        "regular-table": "^0.6.3",
+        "regular-table": "^0.6.8",
         "rxjs": "^7.8.1"
-    },
-    "resolutions": {
-        "**/@types/react": "^17.0.0"
     },
     "publishConfig": {
         "access": "public"

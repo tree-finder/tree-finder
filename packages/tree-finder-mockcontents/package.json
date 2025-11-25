@@ -38,8 +38,7 @@
         "webpack:watch": "webpack --color --watch"
     },
     "dependencies": {
-        "faker": "^6.6.6",
-        "@tree-finder/base": "^0.1.0"
+        "@tree-finder/base": "workspace:*"
     },
     "publishConfig": {
         "access": "public"
