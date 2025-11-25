@@ -57,10 +57,10 @@ Include via a CDN like [JSDelivr](https://cdn.jsdelivr.net/npm/tree-finder):
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tree-finder/base/dist/theme/material.css">
 ```
 
-Or, add to your project via `yarn`:
+Or, add to your project via `pnpm`:
 
 ```bash
-yarn add @tree-finder/base
+pnpm add @tree-finder/base
 ```
 
 ... then import into your asset bundle.
@@ -72,16 +72,16 @@ import "@tree-finder/base/style/theme/material.css";
 
 ## Development
 
-- First, ensure that you have `nodejs >= 12.0.0` and `yarn >= v1.2.0` installed
+- First, ensure that you have `nodejs >= 20.0.0` and `pnpm` installed
 - Clone this repo
 - Build and run the "simple" example
   ```bash
   cd examples/simple
-  yarn
-  yarn start
+  pnpm
+  pnpm run start
   ```
 
-`yarn start` will launch a dev server. Open the url it supplies in any browser in order to view the example. While the dev server is running, any changes you make to the source code (ie any `.ts` or `.less` files) will trigger a rebuild, and the example will automatically reload in your browser.
+`pnpm run start` will launch a dev server. Open the url it supplies in any browser in order to view the example. While the dev server is running, any changes you make to the source code (ie any `.ts` or `.less` files) will trigger a rebuild, and the example will automatically reload in your browser.
 
 
 ## Data Model

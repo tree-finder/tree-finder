@@ -62,7 +62,8 @@ export class TreeFinderPanelElement<T extends IContentRow> extends HTMLElement {
         if (this.options.showFilter) {
             this.filters.init(this._model);
         }
-        this.grid.init(this._model, gridOptions);
+
+        await this.grid.init(this._model, gridOptions);
 
         this._model.columnWidthsSub.subscribe((widths) => {
             if (!widths.length) {

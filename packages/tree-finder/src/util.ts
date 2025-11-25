@@ -140,8 +140,6 @@ export namespace RegularTable {
         if (rowHeaderClicked(metadata)) {
             console.log(`row header clicked`);
         }
-
-        console.log(metadata);
     }
 
     /*
@@ -154,8 +152,8 @@ export namespace RegularTable {
             value instanceof HTMLElement
                 ? value.textContent
                 : (column_header as any) === "0"
-                ? "path"
-                : value
+                  ? "path"
+                  : value
         )! as string;
     }
 

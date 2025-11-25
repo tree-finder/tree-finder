@@ -44,3 +44,4 @@ MANIFEST
 # testing
 playwright-report
 junit.xml
+test-results

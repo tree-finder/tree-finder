@@ -28,6 +28,10 @@ export class TreeFinderGridElement<
     ) {
         this.model = model;
         this.options = options;
+
+        // wait for registration of regular-table component
+        await customElements.whenDefined("regular-table");
+
         // TODO: apply the setDataListener typing fix below, once regular-table has pulled in the relevant typing fixes upstream
         // this.setDataListener(this.dataListener.bind(this), {virtual_mode: this._options.virtual_mode});
         (this as any).setDataListener(this.dataListener.bind(this), {
@@ -162,12 +166,10 @@ export class TreeFinderGridElement<
                 const sortOrder =
                     this.model.sortStates.byColumn[col === "0" ? "path" : col]
                         ?.order;
-                th
-                    .querySelector(".tf-header-sort")
-                    ?.classList.toggle(
-                        `tf-header-sort-${sortOrder}`,
-                        !!sortOrder,
-                    );
+                th.querySelector(".tf-header-sort")?.classList.toggle(
+                    `tf-header-sort-${sortOrder}`,
+                    !!sortOrder,
+                );
             }
 
             th.classList.toggle(
