@@ -22,15 +22,12 @@ const RegularTableElement = customElements.get("regular-table");
 export class TreeFinderGridElement<
     T extends IContentRow,
 > extends RegularTableElement {
-    async init(
+    init(
         model: ContentsModel<T>,
         options: TreeFinderGridElement.IOptions<T> = {},
     ) {
         this.model = model;
         this.options = options;
-
-        // wait for registration of regular-table component
-        await customElements.whenDefined("regular-table");
 
         // TODO: apply the setDataListener typing fix below, once regular-table has pulled in the relevant typing fixes upstream
         // this.setDataListener(this.dataListener.bind(this), {virtual_mode: this._options.virtual_mode});
@@ -69,7 +66,6 @@ export class TreeFinderGridElement<
             tbody.addEventListener("mouseup", (event) =>
                 this.onTreeClick(event),
             );
-            // this.addEventListener("scroll", () => (this as any)._resetAutoSize());
 
             // click debug listener
             // this.addEventListener("mousedown", event => RegularTable.clickLoggingListener(event, this));
@@ -549,5 +545,11 @@ export namespace TreeFinderGridElement {
 }
 
 if (document.createElement("tree-finder-grid").constructor === HTMLElement) {
-    customElements.define("tree-finder-grid", TreeFinderGridElement);
+    Promise.all([
+        customElements.whenDefined("tree-finder-breadcrumbs"),
+        customElements.whenDefined("tree-finder-filters"),
+        customElements.whenDefined("regular-table"),
+    ]).then(() => {
+        customElements.define("tree-finder-grid", TreeFinderGridElement);
+    });
 }

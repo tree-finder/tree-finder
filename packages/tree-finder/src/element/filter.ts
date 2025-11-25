@@ -97,20 +97,6 @@ export class TreeFinderFilterElement<
     private _initializedListeners: boolean = false;
 }
 
-export namespace TreeFinderFilterElement {
-    export function get() {
-        if (
-            document.createElement("tree-finder-filter").constructor ===
-            HTMLElement
-        ) {
-            customElements.define(
-                "tree-finder-filter",
-                TreeFinderFilterElement,
-            );
-        }
-
-        return customElements.get("tree-finder-filter");
-    }
+if (document.createElement("tree-finder-filter").constructor === HTMLElement) {
+    customElements.define("tree-finder-filter", TreeFinderFilterElement);
 }
-
-TreeFinderFilterElement.get();

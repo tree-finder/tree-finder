@@ -38,7 +38,7 @@ export class TreeFinderPanelElement<T extends IContentRow> extends HTMLElement {
         ];
     }
 
-    async init({
+    init({
         root,
         options = {},
         modelOptions = {},
@@ -63,7 +63,7 @@ export class TreeFinderPanelElement<T extends IContentRow> extends HTMLElement {
             this.filters.init(this._model);
         }
 
-        await this.grid.init(this._model, gridOptions);
+        this.grid.init(this._model, gridOptions);
 
         this._model.columnWidthsSub.subscribe((widths) => {
             if (!widths.length) {
@@ -79,7 +79,7 @@ export class TreeFinderPanelElement<T extends IContentRow> extends HTMLElement {
             }
         });
 
-        await this.draw();
+        this.draw();
     }
 
     async draw() {
@@ -172,5 +172,11 @@ export namespace TreeFinderPanelElement {
 }
 
 if (document.createElement("tree-finder-panel").constructor === HTMLElement) {
-    customElements.define("tree-finder-panel", TreeFinderPanelElement);
+    Promise.all([
+        customElements.whenDefined("tree-finder-breadcrumbs"),
+        customElements.whenDefined("tree-finder-filters"),
+        customElements.whenDefined("tree-finder-grid"),
+    ]).then(() => {
+        customElements.define("tree-finder-panel", TreeFinderPanelElement);
+    });
 }
