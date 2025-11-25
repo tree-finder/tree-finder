@@ -97,5 +97,7 @@ export class TreeFinderFiltersElement<
 // }
 
 if (document.createElement("tree-finder-filters").constructor === HTMLElement) {
-    customElements.define("tree-finder-filters", TreeFinderFiltersElement);
+    customElements.whenDefined("tree-finder-filter").then(() => {
+        customElements.define("tree-finder-filters", TreeFinderFiltersElement);
+    });
 }

@@ -2,7 +2,7 @@
     "$schema": "http://json.schemastore.org/tsconfig",
     "compilerOptions": {
         "skipLibCheck": true,
-        "lib": ["ES2019", "DOM"],
+        "lib": ["ES2019", "DOM", "DOM.Iterable"],
         "composite": true,
         "declaration": true,
         "declarationMap": true,
