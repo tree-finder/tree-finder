@@ -1,6 +1,6 @@
 {
     "name": "@tree-finder/base",
-    "version": "1.0.2",
+    "version": "1.0.3",
     "description": "browser/tree widget implemented as a custom DOM element. Built on top of regular-table",
     "license": "BSD-3-Clause",
     "author": "Max Klein <telamonian@users.noreply.github.com>",
