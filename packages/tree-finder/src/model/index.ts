@@ -5,4 +5,5 @@
  * the BSD 3 Clause license. The full license can be found in the LICENSE file.
  */
 export * from "./clipboard";
+export * from "./mock";
 export * from "./model";

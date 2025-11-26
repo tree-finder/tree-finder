@@ -21,7 +21,6 @@
     "keywords": [],
     "license": "BSD-3-Clause",
     "dependencies": {
-        "@tree-finder/base": "workspace:*",
-        "@tree-finder/mockcontents": "workspace:*"
+        "@tree-finder/base": "workspace:*"
     }
 }

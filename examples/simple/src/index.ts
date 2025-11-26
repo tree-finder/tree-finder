@@ -5,7 +5,7 @@
  * the BSD 3 Clause license. The full license can be found in the LICENSE file.
  */
 import "@tree-finder/base";
-import { mockContent } from "@tree-finder/mockcontents";
+import { mockContent } from "@tree-finder/base";
 
 import "../style";
 

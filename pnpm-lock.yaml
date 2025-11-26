@@ -110,9 +110,6 @@ importers:
       '@tree-finder/base':
         specifier: workspace:*
         version: link:../../packages/tree-finder
-      '@tree-finder/mockcontents':
-        specifier: workspace:*
-        version: link:../../packages/tree-finder-mockcontents
 
   packages/tree-finder:
     dependencies:
@@ -122,12 +119,6 @@ importers:
       rxjs:
         specifier: ^7.8.1
         version: 7.8.2
-
-  packages/tree-finder-mockcontents:
-    dependencies:
-      '@tree-finder/base':
-        specifier: workspace:*
-        version: link:../tree-finder
 
 packages:
 

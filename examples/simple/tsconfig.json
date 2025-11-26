@@ -11,9 +11,6 @@
     "references": [
         {
             "path": "../../packages/tree-finder"
-        },
-        {
-            "path": "../../packages/tree-finder-mockcontents"
         }
     ]
 }
