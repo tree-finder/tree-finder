@@ -21,7 +21,7 @@ export default defineConfig({
 
     use: {
         // Base URL to use in actions like `await page.goto('/')`.
-        baseURL: "http://127.0.0.1:8080",
+        baseURL: "http://127.0.0.1:4000/",
 
         // Collect trace when retrying the failed test.
         trace: "on-first-retry",
@@ -35,9 +35,8 @@ export default defineConfig({
     ],
     // Run your local dev server before starting the tests.
     webServer: {
-        command: "pnpm --filter simple start",
-        url: "http://127.0.0.1:8080",
-        reuseExistingServer: !process.env.CI,
+        command: "http-server . -p 4000",
+        url: "http://127.0.0.1:4000/",
         timeout: 120 * 1000,
     },
 });

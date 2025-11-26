@@ -1,29 +1,52 @@
 {
-    "private": true,
+    "name": "@tree-finder/base",
+    "version": "1.0.2",
+    "description": "browser/tree widget implemented as a custom DOM element. Built on top of regular-table",
     "license": "BSD-3-Clause",
-    "workspaces": {
-        "packages": [
-            "examples/**",
-            "packages/**"
-        ]
+    "author": "Max Klein <telamonian@users.noreply.github.com>",
+    "homepage": "https://github.com/tree-finder/tree-finder",
+    "bugs": {
+        "url": "https://github.com/tree-finder/tree-finder/issues"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/tree-finder/tree-finder.git"
+    },
+    "main": "dist/tree-finder.js",
+    "style": "dist/tree-finder.css",
+    "types": "types/index.d.ts",
+    "files": [
+        "dist/**/*",
+        "src/**/*",
+        "style/**/*.{css,eot,gif,html,jpg,json,less,png,scss,svg,ttf,woff2}",
+        "types/**/*"
+    ],
+    "publishConfig": {
+        "access": "public"
     },
     "scripts": {
-        "build": "pnpm --filter @tree-finder/base build",
-        "clean": "pnpm --filter @tree-finder/base clean",
+        "build": "tsc --build",
+        "build:watch": "tsc --build --watch",
+        "clean": "rimraf dist lib types *.tsbuildinfo",
         "integrity": "pnpm install && pnpm dedupe && pnpm install",
-        "lint:base": "pnpm --filter @tree-finder/base lint",
-        "lint:top": "prettier --check \"*.js\" \"*.json\"",
-        "lint": "npm-run-all lint:*",
-        "fix:base": "pnpm --filter @tree-finder/base fix",
-        "fix:top": "prettier --write  \"*.js\" \"*.json\"",
-        "fix": "npm-run-all fix:*",
-        "start:simple": "pnpm --filter simple start",
+        "lint": "prettier --check \"*.js\" \"*.json\" \"src/**/*.ts\" \"tests/**/*.js\" \"style/**/*.less\" \"*.js\" \"*.json\"",
+        "fix": "prettier --write \"*.js\" \"*.json\" \"src/**/*.ts\" \"tests/**/*.js\" \"style/**/*.less\" \"*.js\" \"*.json\"",
+        "prepublishOnly": "pnpm run clean && pnpm run webpack:prod",
         "start": "http-server -p 4000 -o examples",
-        "test": "pnpm --filter @tree-finder/base test",
-        "webpack:dev:base": "pnpm --filter @tree-finder/base webpack",
-        "webpack": "npm-run-all webpack:dev:*",
-        "webpack:prod:base": "pnpm --filter @tree-finder/base webpack:prod",
-        "webpack:prod": "npm-run-all webpack:prod:*"
+        "svgo": "svgo --config svgo.yaml",
+        "svgo:uri": "svgo --config svgo.yaml --datauri=base64 -o -",
+        "test:unit": "jest",
+        "test:e2e": "playwright test",
+        "test_ui": "playwright test --ui",
+        "test": "npm-run-all test:*",
+        "watch": "npm-run-all -p *:watch",
+        "webpack": "webpack --color",
+        "webpack:prod": "NODE_ENV=production webpack --color",
+        "webpack:watch": "webpack --color --watch"
+    },
+    "dependencies": {
+        "regular-table": "^0.6.8",
+        "rxjs": "^7.8.1"
     },
     "devDependencies": {
         "@playwright/test": "^1.57.0",
@@ -37,7 +60,6 @@
         "jest": "^30.2.0",
         "jest-environment-jsdom": "^30.2.0",
         "jest-junit": "^16.0.0",
-        "lerna": "^9.0.1",
         "less": "^4.4.2",
         "less-loader": "~12.3.0",
         "mini-css-extract-plugin": "^2.9.4",
