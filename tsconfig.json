@@ -1,18 +1,23 @@
 {
     "$schema": "http://json.schemastore.org/tsconfig",
+
     "compilerOptions": {
-        "skipLibCheck": true,
-        "lib": ["ES2019", "DOM", "DOM.Iterable"],
         "composite": true,
         "declaration": true,
+        "declarationDir": "types",
         "declarationMap": true,
         "incremental": true,
+        "lib": ["ES2019", "DOM", "DOM.Iterable"],
         "module": "esnext",
         "moduleResolution": "node",
         "noEmitOnError": true,
         "noImplicitAny": true,
+        "outDir": "lib",
+        "skipLibCheck": true,
         "sourceMap": true,
         "strictNullChecks": true,
+        "rootDir": "src",
         "target": "es2019"
-    }
+    },
+    "include": ["src/**/*"]
 }

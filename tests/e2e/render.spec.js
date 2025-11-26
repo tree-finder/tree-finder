@@ -9,7 +9,7 @@ async function getElement(page) {
 
 test.describe("Basic render test", () => {
     test.beforeEach(async ({ page }) => {
-        await page.goto("./index.html", {
+        await page.goto("./examples/index.html", {
             waitUntil: "networkidle",
         });
 
@@ -17,7 +17,7 @@ test.describe("Basic render test", () => {
         await page.waitForFunction(
             () => document.querySelector("tree-finder-panel"),
             null,
-            { timeout: 10000 },
+            { timeout: 2000 },
         );
     });
 

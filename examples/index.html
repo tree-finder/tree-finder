@@ -1,0 +1,70 @@
+<!--
+
+   Copyright (c) 2020, Max Klein.
+
+   This file is part of the tree-finder library, distributed under the terms of
+   the BSD 3 Clause license. The full license can be found in the LICENSE file.
+
+-->
+
+<!--
+
+   A simple file browser example built with [`tree-finder`](https://github.com/tree-finder/tree-finder),
+   loading the main script from this repo's copy of tree-finder. Requires a previous build of ../../packages/tree-finder
+
+-->
+
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" name="viewport">
+  <script src="../dist/tree-finder.js"></script>
+  <link rel="stylesheet" href="../dist/tree-finder.css">
+  <link rel="stylesheet" href="../dist/theme/material.css">
+
+  <style>
+        body {
+            margin-right: 0;
+            margin-bottom: 0;
+        }
+
+        tree-finder-panel {
+            height: calc(100vh - 8px);
+        }
+
+        tree-finder-grid {
+            padding: 0;
+            margin-left: 12px;
+            overflow-x: auto;
+        }
+  </style>
+</head>
+
+<body>
+
+  <script type="module">
+    import "../dist/tree-finder.js";
+
+    const root = mockContent({
+        kind: "dir",
+        path: [],
+        randomize: true,
+    });
+
+    window.addEventListener("load", async () => {
+        const treeFinder = document.createElement("tree-finder-panel");
+        // const treeFinder = new TreeFinderPanelElement();
+        document.body.append(treeFinder);
+
+        await treeFinder.init({
+            root,
+            gridOptions: {
+                doWindowResize: true,
+                showFilter: true,
+            },
+        });
+    });
+  </script>
+</body>
+</html>
