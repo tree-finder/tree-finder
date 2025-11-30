@@ -45,7 +45,7 @@
         "webpack:watch": "webpack --color --watch"
     },
     "dependencies": {
-        "regular-table": "^0.6.8",
+        "regular-table": "^0.6.9",
         "rxjs": "^7.8.1"
     },
     "devDependencies": {

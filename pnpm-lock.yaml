@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       regular-table:
-        specifier: ^0.6.8
-        version: 0.6.8
+        specifier: ^0.6.9
+        version: 0.6.9
       rxjs:
         specifier: ^7.8.1
         version: 7.8.2
@@ -3081,8 +3081,8 @@ packages:
     resolution: {integrity: sha512-dYqgNSZbDwkaJ2ceRd9ojCGjBq+mOm9LmtXnAnEGyHhN/5R7iDW2TRw3h+o/jCFxus3P2LfWIIiwowAjANm7IA==}
     engines: {node: '>= 0.4'}
 
-  regular-table@0.6.8:
-    resolution: {integrity: sha512-IHl/UFSiMCjPpct2Qib/SckyWwIXH/JVHIyFLfYhhNpjS8lzyEB7HqiuSuunug5yk9tuUbNECRGJUKR0nfh1QA==}
+  regular-table@0.6.9:
+    resolution: {integrity: sha512-P37PUJbquTHE8mi8MSa7wdAUP2XdARsaQVJY/F4Yig6Mujss6eSZlOC1ZlEjqVpZVf8zkn3PEUZ7vPM2thabMw==}
     engines: {node: '>=16'}
 
   relateurl@0.2.7:
@@ -7297,7 +7297,7 @@ snapshots:
       gopd: 1.2.0
       set-function-name: 2.0.2
 
-  regular-table@0.6.8: {}
+  regular-table@0.6.9: {}
 
   relateurl@0.2.7: {}
 
