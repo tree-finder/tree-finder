@@ -1,0 +1,64 @@
+name: GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+concurrency:
+  group: pages-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v6
+
+    - name: Setup Node.js
+      uses: actions-ext/node/setup@main
+      with:
+        js_folder: "."
+
+    - name: Install dependencies
+      run: pnpm install
+
+    - name: Build
+      run: |
+        pnpm run build
+        NODE_ENV=production pnpm run webpack
+
+    - name: Assemble site
+      run: |
+        mkdir -p _site/dist _site/examples
+        cp -r dist/* _site/dist/
+        cp examples/index.html _site/examples/
+        cat > _site/index.html << 'EOF'
+        <!DOCTYPE html>
+        <html>
+        <head><meta http-equiv="refresh" content="0;url=examples/index.html"></head>
+        <body><a href="examples/index.html">Redirecting to example...</a></body>
+        </html>
+        EOF
+
+    - name: Upload Pages artifact
+      uses: actions/upload-pages-artifact@v3
+      with:
+        path: _site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+    - name: Deploy to GitHub Pages
+      id: deployment
+      uses: actions/deploy-pages@v4
