@@ -45,7 +45,7 @@ which can be used to easily render filebrowers or other hierarchical trees. Only
 ||
 |:--|
 |basic|
-|[![basic](https://raw.githubusercontent.com/tree-finder/tree-finder/main/docs/basic_example.png)](https://gist.github.com/telamonian/330781ee64e02c514081851d272cd0a6)|
+|[![basic](https://raw.githubusercontent.com/tree-finder/tree-finder/main/docs/basic_example.png)](https://tree-finder.github.io/tree-finder/examples/index.html)|
 
 ## Installation
 
